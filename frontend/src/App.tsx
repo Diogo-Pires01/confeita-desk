@@ -2,7 +2,7 @@ import "./App.css";
 
 function App() {
   return (
-    <div className="bg-green-100 font-semibold text-2xl p-8">
+    <div className="bg-primary text-secondary-title text-text-main">
       TESTE TAILWIND
     </div>
   );
