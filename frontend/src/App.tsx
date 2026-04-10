@@ -2,9 +2,9 @@ import "./App.css";
 
 function App() {
   return (
-    <>
-      <h1>Base frontend</h1>
-    </>
+    <div className="bg-green-100 font-semibold text-2xl p-8">
+      TESTE TAILWIND
+    </div>
   );
 }
 
