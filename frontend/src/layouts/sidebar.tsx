@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
   Menu,
   X,
@@ -19,9 +18,12 @@ const menuItems = [
   { name: 'Carteira', icon: Wallet },
 ];
 
-export default function Sidebar() {
-  const [isOpen, setIsOpen] = useState(true);
+interface SidebarProps {
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
+}
 
+export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   return (
     <aside
       className={`relative bg-white shadow-lg h-screen p-4 transition-all duration-500 ease-in-out ${
@@ -31,7 +33,13 @@ export default function Sidebar() {
       <div
         className={`flex items-center mb-6 ${isOpen ? 'justify-between' : 'justify-center'}`}
       >
-        {isOpen && <h1 className="text-xl font-bold">ConfeitaDesk</h1>}
+        {isOpen && (
+          <img
+            src="/img/logoConfeitaDesk.png"
+            alt="Confeita Desk"
+            className="h-9 w-auto object-contain ml-3"
+          />
+        )}
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}

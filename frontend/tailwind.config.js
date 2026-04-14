@@ -7,14 +7,6 @@ export default {
         sans: ["Inter", "sans-serif"],
       },
 
-      fontSize: {
-        title: "28px",
-        "secondary-title": "22px",
-        subtitle: "18px",
-        body: "16px",
-        small: "12px",
-      },
-
       colors: {
         primary: "#2ec4b6",
         background: "#cbf3f0",
