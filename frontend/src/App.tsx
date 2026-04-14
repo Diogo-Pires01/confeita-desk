@@ -1,9 +1,10 @@
-import "./App.css";
+import './App.css';
+import Sidebar from './layouts/sidebar';
 
 function App() {
   return (
-    <div className="bg-primary text-secondary-title text-text-main">
-      TESTE TAILWIND
+    <div className="flex">
+      <Sidebar />
     </div>
   );
 }
