@@ -15,7 +15,10 @@ export default function Header() {
   return (
     <header className="flex items-center justify-between bg-white shadow-sm px-6 py-3">
       <div className="relative w-96">
-        <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+        <Search
+          size={18}
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+        />
         <input
           type="text"
           placeholder="Buscar..."
@@ -28,13 +31,15 @@ export default function Header() {
           <button
             aria-label="Notificações"
             onClick={() => setNotifOpen((prev) => !prev)}
-            className="p-2 rounded-xl hover:bg-background transition"
+            className="p-2 rounded-xl"
           >
             <Bell size={20} />
           </button>
           {notifOpen && (
             <div className="absolute right-0 mt-2 w-72 bg-white rounded-xl shadow-lg border border-gray-100 p-4 z-50">
-              <p className="text-sm text-gray-400 text-center">Nenhuma notificação</p>
+              <p className="text-sm text-gray-400 text-center">
+                Nenhuma notificação
+              </p>
             </div>
           )}
         </div>
@@ -53,7 +58,9 @@ export default function Header() {
           </button>
           {avatarOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 p-4 z-50">
-              <p className="text-sm text-gray-400 text-center">Sem informações</p>
+              <p className="text-sm text-gray-400 text-center">
+                Sem informações
+              </p>
             </div>
           )}
         </div>

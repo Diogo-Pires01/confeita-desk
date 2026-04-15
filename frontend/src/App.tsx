@@ -1,22 +1,13 @@
-import './App.css';
-import { useState } from 'react';
-import Sidebar from './layouts/Sidebar';
-import Header from './layouts/Header';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-function App() {
-  const [isOpen, setIsOpen] = useState(true);
+import DashboardLayout from './layouts/DashboardLayout';
 
+export default function AppRoutes() {
   return (
-    <div className="flex h-screen">
-      <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
-      <div className="flex flex-col flex-1">
-        <Header />
-        <main className="flex-1 p-6 bg-gray-50 overflow-auto">
-          <h2 className="text-2xl font-semibold">Dashboard</h2>
-        </main>
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<DashboardLayout />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
