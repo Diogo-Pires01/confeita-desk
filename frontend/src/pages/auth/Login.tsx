@@ -4,33 +4,33 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center bg-background"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%232ec4b6' fill-opacity='0.21' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E")`,
-      }}
-    >
-      <div className="bg-surface px-10 py-12 rounded-xl shadow-lg text-center flex flex-col items-center gap-2 max-w-sm w-full">
-        <div className="mb-2">
-          <span className="text-4xl">🧁</span>
+    <div className="relative min-h-screen flex items-center justify-center bg-bg overflow-hidden">
+      {/* Glow effects */}
+      <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[120px]" />
+      <div className="absolute bottom-[-10%] right-[-5%] w-[300px] h-[300px] bg-accent/10 rounded-full blur-[100px]" />
+
+      <div className="relative z-10 flex flex-col items-center gap-6 w-full max-w-sm px-6">
+        <div className="w-full rounded-2xl border border-border bg-bg-card backdrop-blur-md p-8 flex flex-col items-center gap-3">
+          <p className="text-2xl font-medium tracking-tight text-text-main m-2">
+            Confeita<span className="text-primary font-semibold">Desk</span>
+          </p>
+          <h2 className="text-2xl font-semibold text-text-main">
+            Bem-vindo de volta!
+          </h2>
+          <p className="text-sm text-text-soft">Faça login para continuar.</p>
+
+          <button
+            onClick={handleGoogleLogin}
+            className="mt-4 w-full flex items-center justify-center gap-2 px-6 py-3 bg-bg-hover border border-border rounded-full text-sm font-medium text-text-main cursor-pointer hover:bg-white/15 transition"
+          >
+            <img
+              src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+              alt="Google"
+              className="w-5 h-5"
+            />
+            Entrar com Google
+          </button>
         </div>
-
-        <h2 className="text-2xl font-bold text-text-main">
-          Bem-vindo de volta!
-        </h2>
-        <p className="text-base text-text-soft">Faça login para continuar.</p>
-
-        <button
-          onClick={handleGoogleLogin}
-          className="mt-6 w-full flex items-center justify-center gap-2 px-6 py-3 bg-gray-50 border border-border rounded-full text-sm font-medium text-text-main cursor-pointer hover:bg-gray-100 transition"
-        >
-          <img
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
-            alt="Google"
-            className="w-5 h-5"
-          />
-          Entrar com Google
-        </button>
       </div>
     </div>
   );

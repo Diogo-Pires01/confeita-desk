@@ -8,14 +8,46 @@ export default {
       },
 
       colors: {
-        primary: "#2ec4b6",
-        background: "#cbf3f0",
-        surface: "#FFFFFF",
-        border: "#E5E7EB",
+        primary: {
+          DEFAULT: "#10b981",
+          light: "#34d399",
+          dark: "#059669",
+        },
+        accent: "#5eead4",
 
+        // Landing & Login (escuro)
+        bg: {
+          DEFAULT: "#0a0f0d",
+          card: "rgba(255,255,255,0.05)",
+          hover: "rgba(255,255,255,0.08)",
+        },
+
+        // Dashboard (claro)
+        dash: {
+          bg: "#f1f5f3",
+          surface: "#ffffff",
+          card: "#f8faf9",
+          hover: "#e8f0ec",
+          border: "#dce5e0",
+        },
+
+        border: {
+          DEFAULT: "rgba(255,255,255,0.08)",
+          light: "rgba(255,255,255,0.12)",
+        },
+
+        // Textos escuros (Landing/Login)
         text: {
-          main: "#1F2937",
-          soft: "#6B7280",
+          main: "#e8f5ef",
+          soft: "#8fbbaa",
+          muted: "#5a8a78",
+        },
+
+        // Textos claros (Dashboard)
+        "dash-text": {
+          main: "#1a2e25",
+          soft: "#4b6358",
+          muted: "#8a9e94",
         },
 
         status: {

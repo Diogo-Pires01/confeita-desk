@@ -26,7 +26,7 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   return (
     <aside
-      className={`relative bg-white shadow-lg h-screen p-4 transition-all duration-250 ease-in-out ${
+      className={`relative bg-dash-surface border-r border-dash-border h-screen p-4 transition-all duration-250 ease-in-out ${
         isOpen ? 'w-64' : 'w-20'
       }`}
     >
@@ -34,47 +34,46 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         className={`flex items-center mb-6 ${isOpen ? 'justify-between' : 'justify-center'}`}
       >
         {isOpen && (
-          <img
-            src="/img/logoConfeitaDesk.png"
-            alt="Confeita Desk"
-            className="h-9 w-auto object-contain ml-3"
-          />
+          <p className="text-xl font-medium tracking-tight text-dash-text-main ml-2">
+            Confeita<span className="text-primary font-semibold">Desk</span>
+          </p>
         )}
         <button
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}
+          className="text-dash-text-muted hover:text-dash-text-main transition"
         >
           {isOpen ? <X /> : <Menu />}
         </button>
       </div>
 
-      <nav className="flex flex-col gap-3">
+      <nav className="flex flex-col gap-1">
         {menuItems.map((item) => {
           const Icon = item.icon;
           return (
             <button
               key={item.name}
-              className={`flex items-center gap-3 p-3 rounded-xl hover:bg-background cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
+              className={`flex items-center gap-3 p-3 rounded-xl text-dash-text-soft hover:bg-dash-hover hover:text-dash-text-main cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
             >
               <Icon size={20} />
-              {isOpen && <span>{item.name}</span>}
+              {isOpen && <span className="text-sm">{item.name}</span>}
             </button>
           );
         })}
       </nav>
 
-      <footer className="absolute bottom-4 left-0 w-full px-4 flex flex-col gap-2">
+      <footer className="absolute bottom-4 left-0 w-full px-4 flex flex-col gap-1">
         <button
-          className={`flex items-center gap-3 p-3 rounded-xl hover:bg-background cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
+          className={`flex items-center gap-3 p-3 rounded-xl text-dash-text-soft hover:bg-dash-hover hover:text-dash-text-main cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
         >
           <Settings size={20} />
-          {isOpen && <span>Configurações</span>}
+          {isOpen && <span className="text-sm">Configurações</span>}
         </button>
         <button
-          className={`flex items-center gap-3 p-3 rounded-xl hover:bg-background cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
+          className={`flex items-center gap-3 p-3 rounded-xl text-dash-text-soft hover:bg-dash-hover hover:text-dash-text-main cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
         >
           <LogOut size={20} />
-          {isOpen && <span>Sair</span>}
+          {isOpen && <span className="text-sm">Sair</span>}
         </button>
       </footer>
     </aside>
