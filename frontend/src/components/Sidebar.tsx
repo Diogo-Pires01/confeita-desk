@@ -26,7 +26,7 @@ interface SidebarProps {
 export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
   return (
     <aside
-      className={`relative bg-white shadow-lg h-screen p-4 transition-all duration-500 ease-in-out ${
+      className={`relative bg-white shadow-lg h-screen p-4 transition-all duration-250 ease-in-out ${
         isOpen ? 'w-64' : 'w-20'
       }`}
     >
