@@ -1,5 +1,8 @@
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
+import { PrismaClient } from '@prisma/client/generated/prisma';
+
+const prisma = new PrismaClient();
 
 passport.use(
   new GoogleStrategy(
@@ -10,14 +13,19 @@ passport.use(
     },
     async (accessToken, refreshToken, profile, done) => {
       try {
-        const email = profile.emails?.[0]?.value;
-        const name = profile.displayName;
-
-        const user = {
-          email,
-          name,
-          googleId: profile.id,
-        };
+        const user = await prisma.user.upsert({
+          where: { googleId: profile.id },
+          update: {
+            name: profile.displayName,
+            picture: profile.photos?.[0]?.value,
+          },
+          create: {
+            googleId: profile.id,
+            email: profile.emails?.[0]?.value ?? '',
+            name: profile.displayName,
+            picture: profile.photos?.[0]?.value,
+          },
+        });
 
         return done(null, user);
       } catch (error) {
@@ -26,3 +34,7 @@ passport.use(
     },
   ),
 );
+
+// Quando estiver sem SSL, rodar:
+// npx prisma generate (to generate the Prisma client after defining the schema)
+// npx prisma migrate dev --name create_user (to create the user table with googleId, email, name, picture fields)
