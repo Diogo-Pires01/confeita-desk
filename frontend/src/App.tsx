@@ -4,6 +4,7 @@ import Landing from './pages/public/Landing';
 import Login from './pages/auth/Login';
 
 import DashboardLayout from './layouts/DashboardLayout';
+import Dashboard from './pages/dashboard/Dashboard';
 
 export default function AppRoutes() {
   return (
@@ -11,7 +12,9 @@ export default function AppRoutes() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<DashboardLayout />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<Dashboard />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

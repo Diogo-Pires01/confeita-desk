@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import {
   Menu,
   X,
@@ -11,11 +12,11 @@ import {
 } from 'lucide-react';
 
 const menuItems = [
-  { name: 'Dashboard', icon: Home },
-  { name: 'Pedidos', icon: ShoppingCart },
-  { name: 'Agenda', icon: CalendarDays },
-  { name: 'Produtos', icon: Package },
-  { name: 'Carteira', icon: Wallet },
+  { name: 'Dashboard', icon: Home, path: '/dashboard' },
+  { name: 'Pedidos', icon: ShoppingCart, path: '/dashboard/pedidos' },
+  { name: 'Agenda', icon: CalendarDays, path: '/dashboard/agenda' },
+  { name: 'Produtos', icon: Package, path: '/dashboard/produtos' },
+  { name: 'Carteira', icon: Wallet, path: '/dashboard/carteira' },
 ];
 
 interface SidebarProps {
@@ -51,13 +52,21 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
         {menuItems.map((item) => {
           const Icon = item.icon;
           return (
-            <button
+            <NavLink
               key={item.name}
-              className={`flex items-center gap-3 p-3 rounded-xl text-dash-text-soft hover:bg-dash-hover hover:text-dash-text-main cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
+              to={item.path}
+              end={item.path === '/dashboard'}
+              className={({ isActive }) =>
+                `flex items-center gap-3 p-3 rounded-xl cursor-pointer transition ${!isOpen ? 'justify-center' : ''} ${
+                  isActive
+                    ? 'bg-primary/10 text-primary-dark font-medium'
+                    : 'text-dash-text-soft hover:bg-dash-hover hover:text-dash-text-main'
+                }`
+              }
             >
               <Icon size={20} />
               {isOpen && <span className="text-sm">{item.name}</span>}
-            </button>
+            </NavLink>
           );
         })}
       </nav>
