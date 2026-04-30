@@ -8,10 +8,10 @@ export default function DashboardLayout() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="flex min-h-screen bg-dash-bg">
+    <div className="flex h-screen bg-dash-bg overflow-hidden">
       <Sidebar isOpen={isOpen} setIsOpen={setIsOpen} />
 
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col overflow-hidden">
         <Header />
 
         <main className="p-4 flex-1 overflow-auto">
