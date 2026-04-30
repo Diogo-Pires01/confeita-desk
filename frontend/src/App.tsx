@@ -5,6 +5,7 @@ import Login from './pages/auth/Login';
 
 import DashboardLayout from './layouts/DashboardLayout';
 import Dashboard from './pages/dashboard/Dashboard';
+import Orders from './pages/orders/Orders';
 
 export default function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export default function AppRoutes() {
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index element={<Dashboard />} />
+          <Route path="pedidos" element={<Orders />} />
         </Route>
       </Routes>
     </BrowserRouter>
