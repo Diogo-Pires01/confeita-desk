@@ -8,6 +8,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Orders from './pages/orders/Orders';
 import Agenda from './pages/agenda/Agenda';
 import Products from './pages/products/Products';
+import Wallet from './pages/wallet/Wallet';
 
 export default function AppRoutes() {
   return (
@@ -20,6 +21,7 @@ export default function AppRoutes() {
           <Route path="pedidos" element={<Orders />} />
           <Route path="agenda" element={<Agenda />} />
           <Route path="produtos" element={<Products />} />
+          <Route path="carteira" element={<Wallet />} />
         </Route>
       </Routes>
     </BrowserRouter>
