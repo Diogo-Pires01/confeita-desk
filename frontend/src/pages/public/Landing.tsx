@@ -1,34 +1,32 @@
 import { ArrowRight } from 'lucide-react';
+import mockup from './mockup3.png';
 
 const Landing = () => {
   return (
     <div className="relative min-h-screen bg-bg text-text-main overflow-hidden">
-      {/* Glow effects */}
       <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-10%] right-[-5%] w-[400px] h-[400px] bg-accent/15 rounded-full blur-[100px]" />
 
-      {/* Navbar */}
-      <nav className="relative z-10 flex items-center justify-between px-8 md:px-16 py-6">
+      <nav className="relative z-10 flex items-center px-8 md:px-16 py-6">
         <span className="text-2xl font-medium tracking-tight">
           Confeita
           <span className="text-primary font-semibold">Desk</span>
         </span>
-        <a
-          href="/login"
-          className="px-6 py-2 text-sm font-medium rounded-full border border-border bg-bg-card backdrop-blur-sm hover:bg-bg-hover transition"
-        >
-          Entrar
-        </a>
       </nav>
 
-      {/* Hero */}
-      <main className="relative z-10 flex flex-col items-center justify-center text-center px-6 h-[calc(100vh-80px)]">
-        <div className="flex flex-col items-center -mt-16">
+      <img
+        src={mockup}
+        alt=""
+        className="absolute z-[5] right-0 bottom-0 h-[105vh] object-contain pointer-events-none"
+      />
+
+      <main className="relative z-10 flex flex-col justify-center px-8 md:px-16 h-[calc(100vh-80px)]">
+        <div className="flex flex-col items-start max-w-xl">
           <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium tracking-wide uppercase text-primary border border-primary/30 rounded-full bg-primary/10">
             Gestão simplificada para confeitarias
           </span>
 
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-3xl tracking-tight">
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight tracking-tight">
             Organize sua confeitaria.{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
               Sem complicação.
