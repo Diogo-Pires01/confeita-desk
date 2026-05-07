@@ -13,8 +13,11 @@ export default function Header() {
   useClickOutside(avatarRef, () => setAvatarOpen(false));
 
   return (
-    <header className="flex items-center justify-between bg-dash-surface border-b border-dash-border px-6 py-3">
-      <div className="relative w-96">
+    <header className="flex items-center justify-between bg-dash-surface border-b border-dash-border px-4 md:px-6 py-3">
+      <p className="text-lg font-medium tracking-tight text-dash-text-main md:hidden">
+        Confeita<span className="text-primary font-semibold">Desk</span>
+      </p>
+      <div className="relative w-96 hidden md:block">
         <Search
           size={18}
           className="absolute left-3 top-1/2 -translate-y-1/2 text-dash-text-muted"

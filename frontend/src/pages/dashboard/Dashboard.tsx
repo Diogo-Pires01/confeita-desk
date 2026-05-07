@@ -14,16 +14,16 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-dash-text-main">
+        <h1 className="text-xl md:text-2xl font-semibold text-dash-text-main">
           Dashboard
         </h1>
-        <div className="flex gap-3">
+        <div className="hidden md:flex gap-3">
           <NewOrderButton />
           <NewProductButton />
         </div>
       </div>
 
-      <div className="grid grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
         <SummaryCard
           label="Total pedidos"
           value={count()}

@@ -10,7 +10,7 @@ const Login = () => {
       <div className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-primary/15 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-10%] right-[-5%] w-[300px] h-[300px] bg-accent/10 rounded-full blur-[100px]" />
 
-      <div className="relative z-10 flex items-stretch w-full max-w-4xl min-h-[500px] rounded-2xl border border-border overflow-hidden">
+      <div className="relative z-10 flex items-stretch w-full max-w-4xl min-h-[500px] mx-4 md:mx-0 rounded-2xl border border-border overflow-hidden">
         <div className="flex-1 bg-bg-card backdrop-blur-md p-8 flex flex-col items-center justify-center gap-3">
           <p className="text-2xl font-medium tracking-tight text-text-main m-2">
             Confeita<span className="text-primary font-semibold">Desk</span>

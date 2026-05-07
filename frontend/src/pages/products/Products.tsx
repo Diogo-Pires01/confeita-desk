@@ -18,13 +18,15 @@ export default function Products() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-dash-text-main">Produtos</h1>
+        <h1 className="text-xl md:text-2xl font-semibold text-dash-text-main">
+          Produtos
+        </h1>
         <NewProductButton />
       </div>
 
       <CategoryFilter active={filter} onChange={setFilter} />
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {filtered.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}

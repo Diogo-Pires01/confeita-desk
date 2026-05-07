@@ -34,11 +34,13 @@ export default function Agenda() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-dash-text-main">Agenda</h1>
+        <h1 className="text-xl md:text-2xl font-semibold text-dash-text-main">
+          Agenda
+        </h1>
         <NewOrderButton />
       </div>
 
-      <div className="grid grid-cols-[1fr_350px] gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_350px] gap-4">
         <MonthCalendar
           year={year}
           month={month}

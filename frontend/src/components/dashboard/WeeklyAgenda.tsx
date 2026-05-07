@@ -70,7 +70,7 @@ export default function WeeklyAgenda({ orders }: WeeklyAgendaProps) {
         </div>
       </div>
 
-      <div className="grid grid-cols-7 gap-2">
+      <div className="flex md:grid md:grid-cols-7 gap-2 overflow-x-auto">
         {days.map(({ label, date }) => {
           const dayOrders = orders.filter((o) => o.date === date);
           const isToday = date === today;
@@ -78,7 +78,7 @@ export default function WeeklyAgenda({ orders }: WeeklyAgendaProps) {
           return (
             <div
               key={date}
-              className={`rounded-xl p-3 min-h-[140px] ${isToday ? 'bg-primary/10 border border-primary/30' : 'bg-dash-card'}`}
+              className={`rounded-xl p-3 min-h-[140px] min-w-[140px] md:min-w-0 shrink-0 ${isToday ? 'bg-primary/10 border border-primary/30' : 'bg-dash-card'}`}
             >
               <p
                 className={`text-xs font-medium mb-2 ${isToday ? 'text-primary-dark' : 'text-dash-text-muted'}`}

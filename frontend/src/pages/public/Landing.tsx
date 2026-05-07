@@ -17,11 +17,11 @@ const Landing = () => {
       <img
         src={mockup}
         alt=""
-        className="absolute z-[5] right-0 bottom-0 h-[105vh] object-contain pointer-events-none"
+        className="absolute z-[5] right-0 bottom-0 h-[105vh] object-contain pointer-events-none hidden md:block"
       />
 
-      <main className="relative z-10 flex flex-col justify-center px-8 md:px-16 h-[calc(100vh-80px)]">
-        <div className="flex flex-col items-start max-w-xl">
+      <main className="relative z-10 flex flex-col justify-center px-6 md:px-16 h-[calc(100vh-80px)]">
+        <div className="flex flex-col items-center text-center md:items-start md:text-left max-w-xl">
           <span className="inline-block px-4 py-1.5 mb-6 text-xs font-medium tracking-wide uppercase text-primary border border-primary/30 rounded-full bg-primary/10">
             Gestão simplificada para confeitarias
           </span>

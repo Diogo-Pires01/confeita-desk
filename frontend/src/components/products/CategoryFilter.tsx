@@ -19,7 +19,7 @@ export default function CategoryFilter({
   onChange,
 }: CategoryFilterProps) {
   return (
-    <div className="flex gap-2">
+    <div className="flex gap-2 overflow-x-auto">
       {filters.map(({ label, value }) => (
         <button
           key={value}
