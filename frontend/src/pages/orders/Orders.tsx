@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { mockOrders } from '../../mocks/dashboard';
 import OrderCard from '../../components/orders/OrderCard';
 import StatusFilter from '../../components/orders/StatusFilter';
-import { NewOrderButton } from '../../components/dashboard/NewOrderButton';
+import { NewOrderButton } from '../../components/NewOrderButton';
 import type { OrderStatus } from '../../types/order';
 
 type FilterValue = OrderStatus | 'todos';

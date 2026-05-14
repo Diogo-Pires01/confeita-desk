@@ -2,8 +2,8 @@ import { ClipboardList, ChefHat, PackageCheck, Truck } from 'lucide-react';
 import { mockOrders } from '../../mocks/dashboard';
 import SummaryCard from '../../components/dashboard/SummaryCard';
 import WeeklyAgenda from '../../components/dashboard/WeeklyAgenda';
-import { NewOrderButton } from '../../components/dashboard/NewOrderButton';
-import { NewProductButton } from '../../components/dashboard/NewProductButton';
+import { NewOrderButton } from '../../components/NewOrderButton';
+import { NewProductButton } from '../../components/NewProductButton';
 
 const count = (status?: string) =>
   status

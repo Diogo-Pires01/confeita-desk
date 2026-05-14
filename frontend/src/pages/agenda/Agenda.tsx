@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { mockOrders } from '../../mocks/dashboard';
 import MonthCalendar from '../../components/agenda/MonthCalendar';
 import DayDetail from '../../components/agenda/DayDetail';
-import { NewOrderButton } from '../../components/dashboard/NewOrderButton';
+import { NewOrderButton } from '../../components/NewOrderButton';
 
 export default function Agenda() {
   const now = new Date();

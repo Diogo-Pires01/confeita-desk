@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { mockProducts } from '../../mocks/products';
 import ProductCard from '../../components/products/ProductCard';
 import CategoryFilter from '../../components/products/CategoryFilter';
-import { NewProductButton } from '../../components/dashboard/NewProductButton';
+import { NewProductButton } from '../../components/NewProductButton';
 import type { ProductCategory } from '../../types/product';
 
 type FilterValue = ProductCategory | 'todos';

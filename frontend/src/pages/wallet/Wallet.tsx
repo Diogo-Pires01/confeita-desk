@@ -6,6 +6,7 @@ import {
   Minus,
 } from 'lucide-react';
 import { mockTransactions } from '../../mocks/wallet';
+import { useModal } from '../../contexts/ModalContext';
 
 const totalEntradas = mockTransactions
   .filter((t) => t.type === 'entrada')
@@ -28,6 +29,7 @@ const typeLabels = {
 };
 
 export default function Wallet() {
+  const { open } = useModal();
   return (
     <div className="space-y-6">
       <h1 className="text-xl md:text-2xl font-semibold text-dash-text-main">
@@ -71,11 +73,11 @@ export default function Wallet() {
       </div>
 
       <div className="flex gap-3">
-        <button className="flex items-center gap-2 px-4 py-2 border border-dash-border rounded-lg text-sm font-medium text-dash-text-main hover:bg-dash-hover transition">
-          <Plus size={16} className="text-green-400" /> Entrada
-        </button>
-        <button className="flex items-center gap-2 px-4 py-2 border border-dash-border rounded-lg text-sm font-medium text-dash-text-main hover:bg-dash-hover transition">
-          <Minus size={16} className="text-red-400" /> Saída
+        <button
+          onClick={() => open('newTransaction')}
+          className="flex items-center gap-2 px-4 py-2 border border-dash-border rounded-lg text-sm font-medium text-dash-text-main hover:bg-dash-hover transition"
+        >
+          <Plus size={16} /> Nova Transação
         </button>
       </div>
 
