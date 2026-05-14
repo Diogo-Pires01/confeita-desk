@@ -3,7 +3,6 @@ import {
   TrendingUp,
   TrendingDown,
   Plus,
-  Minus,
 } from 'lucide-react';
 import { mockTransactions } from '../../mocks/wallet';
 import { useModal } from '../../contexts/ModalContext';

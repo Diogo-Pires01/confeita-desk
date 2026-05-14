@@ -3,28 +3,60 @@ import ModalOverlay from './ModalOverlay';
 export default function NewTransactionModal() {
   return (
     <ModalOverlay title="Nova Transação">
-      <form className="flex flex-col gap-4">
-        <select className="w-full px-3 py-2 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary">
-          <option value="entrada">Entrada</option>
-          <option value="saida">Saída</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Descrição"
-          className="w-full px-3 py-2 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main placeholder:text-dash-text-muted outline-none focus:ring-2 focus:ring-primary"
-        />
-        <input
-          type="number"
-          placeholder="Valor (R$)"
-          className="w-full px-3 py-2 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main placeholder:text-dash-text-muted outline-none focus:ring-2 focus:ring-primary"
-        />
-        <input
-          type="date"
-          className="w-full px-3 py-2 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary"
-        />
+      <form className="flex flex-col gap-5">
+        <fieldset className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-dash-text-muted">
+            Tipo
+          </label>
+          <select className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition">
+            <option value="entrada">Entrada</option>
+            <option value="saida">Saída</option>
+          </select>
+        </fieldset>
+
+        <fieldset className="flex flex-col gap-1.5">
+          <label className="text-xs font-medium text-dash-text-muted">
+            Descrição
+          </label>
+          <input
+            type="text"
+            placeholder="Ex: Bolo de aniversário - Maria"
+            className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main placeholder:text-dash-text-muted outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
+          />
+        </fieldset>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <fieldset className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-dash-text-muted">
+              Valor
+            </label>
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-dash-text-muted">
+                R$
+              </span>
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="0,00"
+                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main placeholder:text-dash-text-muted outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
+              />
+            </div>
+          </fieldset>
+          <fieldset className="flex flex-col gap-1.5">
+            <label className="text-xs font-medium text-dash-text-muted">
+              Data
+            </label>
+            <input
+              type="date"
+              className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
+            />
+          </fieldset>
+        </div>
+
         <button
           type="submit"
-          className="w-full py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-xl transition"
+          className="w-full py-2.5 mt-1 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-xl transition"
         >
           Registrar
         </button>
