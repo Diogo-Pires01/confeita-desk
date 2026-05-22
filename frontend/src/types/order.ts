@@ -5,7 +5,6 @@ export interface Order {
   customer: string;
   product: string;
   date: string;
-  time: string;
   status: OrderStatus;
   total: number;
 }

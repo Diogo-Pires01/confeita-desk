@@ -1,5 +1,6 @@
 import { Calendar } from 'lucide-react';
 import type { Order, OrderStatus } from '../../types/order';
+import { useModal } from '../../contexts/ModalContext';
 
 const statusStyle: Record<OrderStatus, string> = {
   preparo: 'bg-status-producao/20 text-yellow-700',
@@ -23,8 +24,13 @@ interface OrderCardProps {
 }
 
 export default function OrderCard({ order }: OrderCardProps) {
+  const { open } = useModal();
+
   return (
-    <div className="bg-dash-surface border border-dash-border rounded-xl p-4 flex flex-col gap-3">
+    <div
+      onClick={() => open('editOrder', order)}
+      className="bg-dash-surface border border-dash-border rounded-xl p-4 flex flex-col gap-3 cursor-pointer hover:border-primary/40 transition"
+    >
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-dash-text-main">
           {order.customer}

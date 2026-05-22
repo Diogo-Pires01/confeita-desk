@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import type { Order, OrderStatus } from '../../types/order';
+import { useModal } from '../../contexts/ModalContext';
 
 const DAY_LABELS = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
 
@@ -36,6 +37,7 @@ function getWeekDays(offset: number): { label: string; date: string }[] {
 }
 
 export default function WeeklyAgenda({ orders }: WeeklyAgendaProps) {
+  const { open } = useModal();
   const [weekOffset, setWeekOffset] = useState(0);
   const days = getWeekDays(weekOffset);
   const today = new Date().toISOString().split('T')[0];
@@ -90,7 +92,8 @@ export default function WeeklyAgenda({ orders }: WeeklyAgendaProps) {
                 {dayOrders.map((order) => (
                   <div
                     key={order.id}
-                    className="bg-dash-surface rounded-lg p-2 border border-dash-border"
+                    onClick={() => open('editOrder', order)}
+                    className="bg-dash-surface rounded-lg p-2 border border-dash-border cursor-pointer hover:border-primary/40 transition"
                   >
                     <p className="text-xs font-medium text-dash-text-main truncate">
                       {order.product}

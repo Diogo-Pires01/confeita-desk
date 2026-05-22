@@ -1,5 +1,6 @@
 import { Clock, User } from 'lucide-react';
 import type { Order, OrderStatus } from '../../types/order';
+import { useModal } from '../../contexts/ModalContext';
 
 const statusStyle: Record<OrderStatus, string> = {
   preparo: 'bg-status-producao/20 text-yellow-700',
@@ -24,6 +25,7 @@ interface DayDetailProps {
 }
 
 export default function DayDetail({ date, orders }: DayDetailProps) {
+  const { open } = useModal();
   const dayOrders = date ? orders.filter((o) => o.date === date) : [];
 
   return (
@@ -47,7 +49,8 @@ export default function DayDetail({ date, orders }: DayDetailProps) {
               {dayOrders.map((order) => (
                 <div
                   key={order.id}
-                  className="bg-dash-card border border-dash-border rounded-xl p-3 flex flex-col gap-2"
+                  onClick={() => open('editOrder', order)}
+                  className="bg-dash-card border border-dash-border rounded-xl p-3 flex flex-col gap-2 cursor-pointer hover:border-primary/40 transition"
                 >
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-medium text-dash-text-main">
@@ -63,10 +66,6 @@ export default function DayDetail({ date, orders }: DayDetailProps) {
                     <span className="flex items-center gap-1">
                       <User size={13} />
                       {order.customer}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock size={13} />
-                      {order.time}
                     </span>
                   </div>
                   <p className="text-xs text-dash-text-soft">
