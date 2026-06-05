@@ -24,7 +24,7 @@ export const transactionService = {
         type: data.type,
         value: data.value,
         date: new Date(data.date),
-        orderId: data.orderId,
+        orderId: data.orderId ?? null,
         userId,
       },
     });

@@ -8,14 +8,6 @@ export interface AuthPayload {
   email: string;
 }
 
-declare global {
-  namespace Express {
-    interface Request {
-      user?: AuthPayload;
-    }
-  }
-}
-
 export function authGuard(req: Request, res: Response, next: NextFunction) {
   const header = req.headers.authorization;
   if (!header?.startsWith('Bearer ')) {
@@ -26,7 +18,7 @@ export function authGuard(req: Request, res: Response, next: NextFunction) {
   try {
     const token = header.split(' ')[1]!;
     const payload = jwt.verify(token, JWT_SECRET) as AuthPayload;
-    req.user = payload;
+    (req as any).authUser = payload;
     next();
   } catch {
     res.status(401).json({ error: 'Token inválido' });
