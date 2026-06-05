@@ -3,7 +3,7 @@ import { orderService } from './order.service.js';
 
 export const orderController = {
   async list(req: Request, res: Response) {
-    const orders = await orderService.findAll(req.user!.id);
+    const orders = await orderService.findAll((req as any).authUser.id);
     res.json(orders);
   },
 
@@ -13,7 +13,7 @@ export const orderController = {
       res.status(400).json({ error: 'customer, date e items são obrigatórios' });
       return;
     }
-    const order = await orderService.create(req.user!.id, {
+    const order = await orderService.create((req as any).authUser.id, {
       customer,
       date,
       items,
@@ -27,12 +27,12 @@ export const orderController = {
       res.status(400).json({ error: 'status é obrigatório' });
       return;
     }
-    await orderService.updateStatus(req.params['id']!, req.user!.id, status);
+    await orderService.updateStatus(req.params['id'] as string, (req as any).authUser.id, status);
     res.status(204).end();
   },
 
   async delete(req: Request, res: Response) {
-    await orderService.delete(req.params['id']!, req.user!.id);
+    await orderService.delete(req.params['id'] as string, (req as any).authUser.id);
     res.status(204).end();
   },
 };

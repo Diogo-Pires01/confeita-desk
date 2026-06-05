@@ -3,7 +3,7 @@ import { transactionService } from './transaction.service.js';
 
 export const transactionController = {
   async list(req: Request, res: Response) {
-    const transactions = await transactionService.findAll(req.user!.id);
+    const transactions = await transactionService.findAll((req as any).authUser.id);
     res.json(transactions);
   },
 
@@ -13,7 +13,7 @@ export const transactionController = {
       res.status(400).json({ error: 'description, type, value e date são obrigatórios' });
       return;
     }
-    const transaction = await transactionService.create(req.user!.id, {
+    const transaction = await transactionService.create((req as any).authUser.id, {
       description,
       type,
       value,
@@ -24,7 +24,7 @@ export const transactionController = {
   },
 
   async delete(req: Request, res: Response) {
-    await transactionService.delete(req.params['id']!, req.user!.id);
+    await transactionService.delete(req.params['id'] as string, (req as any).authUser.id);
     res.status(204).end();
   },
 };
