@@ -1,11 +1,13 @@
 import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import eslintConfigPrettier from 'eslint-config-prettier';
 import globals from 'globals';
 
 export default [
-  {
-    ignores: ['dist', 'node_modules'],
-  },
+  { ignores: ['dist', 'node_modules'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
+  eslintConfigPrettier,
   {
     files: ['**/*.{ts,js}'],
     languageOptions: {
@@ -13,10 +15,5 @@ export default [
       sourceType: 'module',
       globals: globals.node,
     },
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.recommended,
-      'prettier',
-    ],
   },
 ];
