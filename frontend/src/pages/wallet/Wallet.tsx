@@ -4,16 +4,8 @@ import {
   TrendingDown,
   Plus,
 } from 'lucide-react';
-import { mockTransactions } from '../../mocks/wallet';
+import { useTransactions } from '../../hooks/useTransactions';
 import { useModal } from '../../contexts/ModalContext';
-
-const totalEntradas = mockTransactions
-  .filter((t) => t.type === 'entrada')
-  .reduce((s, t) => s + t.value, 0);
-const totalSaidas = mockTransactions
-  .filter((t) => t.type !== 'entrada')
-  .reduce((s, t) => s + t.value, 0);
-const saldo = totalEntradas - totalSaidas;
 
 const typeStyles = {
   entrada: 'text-green-400',
@@ -29,6 +21,18 @@ const typeLabels = {
 
 export default function Wallet() {
   const { open } = useModal();
+  const { transactions, loading } = useTransactions();
+
+  const totalEntradas = transactions
+    .filter((t) => t.type === 'entrada')
+    .reduce((s, t) => s + t.value, 0);
+  const totalSaidas = transactions
+    .filter((t) => t.type !== 'entrada')
+    .reduce((s, t) => s + t.value, 0);
+  const saldo = totalEntradas - totalSaidas;
+
+  if (loading) return <p className="text-dash-text-muted">Carregando...</p>;
+
   return (
     <div className="space-y-6">
       <h1 className="text-xl md:text-2xl font-semibold text-dash-text-main">
@@ -85,7 +89,7 @@ export default function Wallet() {
           <h2 className="text-lg font-medium text-dash-text-main">Histórico</h2>
         </div>
         <div className="divide-y divide-dash-border">
-          {mockTransactions.map((t) => (
+          {transactions.map((t) => (
             <div
               key={t.id}
               className="flex items-center justify-between px-5 py-3"
@@ -93,7 +97,8 @@ export default function Wallet() {
               <div>
                 <p className="text-sm text-dash-text-main">{t.description}</p>
                 <p className="text-xs text-dash-text-muted">
-                  {t.date.split('-').reverse().join('/')} · {typeLabels[t.type]}
+                  {t.date.split('T')[0]?.split('-').reverse().join('/')} ·{' '}
+                  {typeLabels[t.type]}
                 </p>
               </div>
               <span className={`text-sm font-medium ${typeStyles[t.type]}`}>

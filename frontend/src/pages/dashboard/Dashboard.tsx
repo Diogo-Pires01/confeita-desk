@@ -1,16 +1,18 @@
 import { ClipboardList, ChefHat, PackageCheck, Truck } from 'lucide-react';
-import { mockOrders } from '../../mocks/dashboard';
+import { useOrders } from '../../hooks/useOrders';
 import SummaryCard from '../../components/dashboard/SummaryCard';
 import WeeklyAgenda from '../../components/dashboard/WeeklyAgenda';
 import { NewOrderButton } from '../../components/NewOrderButton';
 import { NewProductButton } from '../../components/NewProductButton';
 
-const count = (status?: string) =>
-  status
-    ? mockOrders.filter((o) => o.status === status).length
-    : mockOrders.length;
-
 export default function Dashboard() {
+  const { orders, loading } = useOrders();
+
+  const count = (status?: string) =>
+    status ? orders.filter((o) => o.status === status).length : orders.length;
+
+  if (loading) return <p className="text-dash-text-muted">Carregando...</p>;
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -50,7 +52,7 @@ export default function Dashboard() {
         />
       </div>
 
-      <WeeklyAgenda orders={mockOrders} />
+      <WeeklyAgenda orders={orders} />
     </div>
   );
 }

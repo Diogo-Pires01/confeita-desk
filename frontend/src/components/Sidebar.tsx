@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   Menu,
   X,
@@ -10,6 +10,7 @@ import {
   Settings,
   LogOut,
 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 const menuItems = [
   { name: 'Dashboard', icon: Home, path: '/dashboard' },
@@ -25,6 +26,13 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate('/login', { replace: true });
+  }
   return (
     <aside
       className={`relative bg-dash-surface border-r border-dash-border h-screen p-4 transition-all duration-250 ease-in-out ${
@@ -79,6 +87,7 @@ export default function Sidebar({ isOpen, setIsOpen }: SidebarProps) {
           {isOpen && <span className="text-sm">Configurações</span>}
         </button>
         <button
+          onClick={handleLogout}
           className={`flex items-center gap-3 p-3 rounded-xl text-dash-text-soft hover:bg-dash-hover hover:text-dash-text-main cursor-pointer transition ${!isOpen ? 'justify-center' : ''}`}
         >
           <LogOut size={20} />

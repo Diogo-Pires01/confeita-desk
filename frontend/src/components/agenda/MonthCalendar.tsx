@@ -100,7 +100,7 @@ export default function MonthCalendar({
           if (day === null) return <div key={`empty-${i}`} />;
 
           const dateStr = toDateStr(year, month, day);
-          const dayOrders = orders.filter((o) => o.date === dateStr);
+          const dayOrders = orders.filter((o) => o.date.split('T')[0] === dateStr);
           const isToday = dateStr === today;
           const isSelected = dateStr === selectedDate;
 

@@ -1,17 +1,46 @@
+import { useState } from 'react';
 import { Trash2 } from 'lucide-react';
 import { useModal } from '../../contexts/ModalContext';
 import ModalOverlay from './ModalOverlay';
 import type { Order } from '../../types/order';
+import api from '../../services/api';
 
 export default function EditOrderModal() {
-  const { payload } = useModal();
+  const { payload, close } = useModal();
   const order = payload as Order;
+  const [loading, setLoading] = useState(false);
 
   if (!order) return null;
 
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = new FormData(e.currentTarget);
+    setLoading(true);
+    try {
+      await api.patch(`/orders/${order.id}/status`, {
+        status: form.get('status'),
+      });
+      close();
+      window.location.reload();
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleDelete() {
+    setLoading(true);
+    try {
+      await api.delete(`/orders/${order.id}`);
+      close();
+      window.location.reload();
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <ModalOverlay title="Editar Pedido">
-      <form className="flex flex-col gap-5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <fieldset className="flex flex-col gap-1.5">
           <label className="text-xs font-medium text-dash-text-muted">
             Cliente
@@ -19,19 +48,23 @@ export default function EditOrderModal() {
           <input
             type="text"
             defaultValue={order.customer}
-            className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
+            disabled
+            className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none opacity-60"
           />
         </fieldset>
 
         <fieldset className="flex flex-col gap-1.5">
           <label className="text-xs font-medium text-dash-text-muted">
-            Produto
+            Produtos
           </label>
-          <input
-            type="text"
-            defaultValue={order.product}
-            className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
-          />
+          <div className="space-y-1">
+            {order.items.map((item) => (
+              <p key={item.id} className="text-sm text-dash-text-soft">
+                {item.quantity}x {item.product.name} — R${' '}
+                {(item.quantity * item.unitPrice).toFixed(2)}
+              </p>
+            ))}
+          </div>
         </fieldset>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -41,8 +74,9 @@ export default function EditOrderModal() {
             </label>
             <input
               type="date"
-              defaultValue={order.date}
-              className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
+              defaultValue={order.date.split('T')[0]}
+              disabled
+              className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none opacity-60"
             />
           </fieldset>
 
@@ -51,6 +85,7 @@ export default function EditOrderModal() {
               Status
             </label>
             <select
+              name="status"
               defaultValue={order.status}
               className="w-full px-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
             >
@@ -63,32 +98,26 @@ export default function EditOrderModal() {
 
         <fieldset className="flex flex-col gap-1.5">
           <label className="text-xs font-medium text-dash-text-muted">
-            Valor
+            Total
           </label>
-          <div className="relative">
-            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-sm text-dash-text-muted">
-              R$
-            </span>
-            <input
-              type="number"
-              min="0"
-              step="0.01"
-              defaultValue={order.total}
-              className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-dash-card border border-dash-border text-sm text-dash-text-main outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary transition"
-            />
-          </div>
+          <p className="text-sm font-medium text-dash-text-main">
+            R$ {order.total.toFixed(2)}
+          </p>
         </fieldset>
 
         <div className="flex gap-3 mt-1">
           <button
             type="submit"
-            className="flex-1 py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-xl transition"
+            disabled={loading}
+            className="flex-1 py-2.5 bg-primary hover:bg-primary-dark text-white text-sm font-medium rounded-xl transition disabled:opacity-50"
           >
             Salvar
           </button>
           <button
             type="button"
-            className="px-4 py-2.5 border border-red-200 text-red-500 hover:bg-red-50 text-sm font-medium rounded-xl transition flex items-center gap-2"
+            onClick={handleDelete}
+            disabled={loading}
+            className="px-4 py-2.5 border border-red-200 text-red-500 hover:bg-red-50 text-sm font-medium rounded-xl transition flex items-center gap-2 disabled:opacity-50"
           >
             <Trash2 size={16} />
             Excluir

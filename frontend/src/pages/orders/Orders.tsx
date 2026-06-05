@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { mockOrders } from '../../mocks/dashboard';
+import { useOrders } from '../../hooks/useOrders';
 import OrderCard from '../../components/orders/OrderCard';
 import StatusFilter from '../../components/orders/StatusFilter';
 import { NewOrderButton } from '../../components/NewOrderButton';
@@ -8,12 +8,15 @@ import type { OrderStatus } from '../../types/order';
 type FilterValue = OrderStatus | 'todos';
 
 export default function Orders() {
+  const { orders, loading } = useOrders();
   const [filter, setFilter] = useState<FilterValue>('todos');
 
   const filtered =
     filter === 'todos'
-      ? mockOrders
-      : mockOrders.filter((o) => o.status === filter);
+      ? orders
+      : orders.filter((o) => o.status === filter);
+
+  if (loading) return <p className="text-dash-text-muted">Carregando...</p>;
 
   return (
     <div className="space-y-6">

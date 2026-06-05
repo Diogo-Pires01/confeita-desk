@@ -1,4 +1,4 @@
-import { Clock, User } from 'lucide-react';
+import { User } from 'lucide-react';
 import type { Order, OrderStatus } from '../../types/order';
 import { useModal } from '../../contexts/ModalContext';
 
@@ -26,7 +26,7 @@ interface DayDetailProps {
 
 export default function DayDetail({ date, orders }: DayDetailProps) {
   const { open } = useModal();
-  const dayOrders = date ? orders.filter((o) => o.date === date) : [];
+  const dayOrders = date ? orders.filter((o) => o.date.split('T')[0] === date) : [];
 
   return (
     <div className="bg-dash-surface border border-dash-border rounded-xl p-5 h-full">
@@ -54,7 +54,7 @@ export default function DayDetail({ date, orders }: DayDetailProps) {
                 >
                   <div className="flex items-center justify-between">
                     <p className="text-sm font-medium text-dash-text-main">
-                      {order.product}
+                      {order.items.map((i) => i.product.name).join(', ')}
                     </p>
                     <span
                       className={`text-[11px] font-medium px-2 py-0.5 rounded-full ${statusStyle[order.status]}`}

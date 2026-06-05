@@ -1,19 +1,11 @@
-import { useState } from 'react';
-import { mockProducts } from '../../mocks/products';
+import { useProducts } from '../../hooks/useProducts';
 import ProductCard from '../../components/products/ProductCard';
-import CategoryFilter from '../../components/products/CategoryFilter';
 import { NewProductButton } from '../../components/NewProductButton';
-import type { ProductCategory } from '../../types/product';
-
-type FilterValue = ProductCategory | 'todos';
 
 export default function Products() {
-  const [filter, setFilter] = useState<FilterValue>('todos');
+  const { products, loading } = useProducts();
 
-  const filtered =
-    filter === 'todos'
-      ? mockProducts
-      : mockProducts.filter((p) => p.category === filter);
+  if (loading) return <p className="text-dash-text-muted">Carregando...</p>;
 
   return (
     <div className="space-y-6">
@@ -24,15 +16,13 @@ export default function Products() {
         <NewProductButton />
       </div>
 
-      <CategoryFilter active={filter} onChange={setFilter} />
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {filtered.map((product) => (
+        {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
 
-      {filtered.length === 0 && (
+      {products.length === 0 && (
         <p className="text-sm text-dash-text-muted text-center py-8">
           Nenhum produto encontrado.
         </p>

@@ -15,8 +15,11 @@ const statusLabel: Record<OrderStatus, string> = {
 };
 
 function formatDate(date: string) {
-  const [y, m, d] = date.split('-');
-  return `${d}/${m}/${y}`;
+  return date.split('T')[0]?.split('-').reverse().join('/') ?? '';
+}
+
+function itemsSummary(order: Order) {
+  return order.items.map((i) => i.product.name).join(', ');
 }
 
 interface OrderCardProps {
@@ -42,16 +45,14 @@ export default function OrderCard({ order }: OrderCardProps) {
         </span>
       </div>
 
-      <p className="text-sm text-dash-text-soft">{order.product}</p>
+      <p className="text-sm text-dash-text-soft truncate">{itemsSummary(order)}</p>
 
       <div className="flex items-center justify-between text-xs text-dash-text-muted">
         <span className="flex items-center gap-1">
           <Calendar size={14} />
           {formatDate(order.date)}
         </span>
-        <span className="flex items-center gap-1">
-          R$ {order.total.toFixed(2)}
-        </span>
+        <span>R$ {order.total.toFixed(2)}</span>
       </div>
     </div>
   );

@@ -31,7 +31,7 @@ function getWeekDays(offset: number): { label: string; date: string }[] {
     d.setDate(sunday.getDate() + i);
     return {
       label: `${DAY_LABELS[i]} ${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`,
-      date: d.toISOString().split('T')[0],
+      date: d.toISOString().split('T')[0]!,
     };
   });
 }
@@ -74,7 +74,9 @@ export default function WeeklyAgenda({ orders }: WeeklyAgendaProps) {
 
       <div className="flex md:grid md:grid-cols-7 gap-2 overflow-x-auto">
         {days.map(({ label, date }) => {
-          const dayOrders = orders.filter((o) => o.date === date);
+          const dayOrders = orders.filter(
+            (o) => o.date.split('T')[0] === date,
+          );
           const isToday = date === today;
 
           return (
@@ -96,7 +98,7 @@ export default function WeeklyAgenda({ orders }: WeeklyAgendaProps) {
                     className="bg-dash-surface rounded-lg p-2 border border-dash-border cursor-pointer hover:border-primary/40 transition"
                   >
                     <p className="text-xs font-medium text-dash-text-main truncate">
-                      {order.product}
+                      {order.items.map((i) => i.product.name).join(', ')}
                     </p>
                     <p className="text-[11px] text-dash-text-muted truncate">
                       {order.customer}

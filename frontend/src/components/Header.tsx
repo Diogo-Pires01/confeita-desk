@@ -1,8 +1,12 @@
 import { useRef, useState } from 'react';
-import { Search, Bell } from 'lucide-react';
+import { Search, Bell, LogOut } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import useClickOutside from '../hooks/useClickOutside';
+import { useAuth } from '../contexts/AuthContext';
 
 export default function Header() {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [notifOpen, setNotifOpen] = useState(false);
   const [avatarOpen, setAvatarOpen] = useState(false);
 
@@ -11,6 +15,15 @@ export default function Header() {
 
   useClickOutside(notifRef, () => setNotifOpen(false));
   useClickOutside(avatarRef, () => setAvatarOpen(false));
+
+  function handleLogout() {
+    logout();
+    navigate('/login', { replace: true });
+  }
+
+  const avatarUrl =
+    user?.picture ||
+    `https://ui-avatars.com/api/?name=${encodeURIComponent(user?.name || 'U')}&background=10b981&color=fff`;
 
   return (
     <header className="flex items-center justify-between bg-dash-surface border-b border-dash-border px-4 md:px-6 py-3">
@@ -54,16 +67,31 @@ export default function Header() {
             className="h-9 w-9 rounded-full overflow-hidden ring-2 ring-dash-border"
           >
             <img
-              src="https://ui-avatars.com/api/?name=User&background=10b981&color=fff"
+              src={avatarUrl}
               alt="Avatar do usuário"
               className="h-full w-full object-cover"
             />
           </button>
           {avatarOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-dash-surface rounded-xl shadow-lg border border-dash-border p-4 z-50">
-              <p className="text-sm text-dash-text-muted text-center">
-                Sem informações
-              </p>
+            <div className="absolute right-0 mt-2 w-56 bg-dash-surface rounded-xl shadow-lg border border-dash-border p-4 z-50 flex flex-col items-center gap-3">
+              <img
+                src={avatarUrl}
+                alt="Foto de perfil"
+                className="h-16 w-16 rounded-full object-cover"
+              />
+              <div className="text-center">
+                <p className="text-sm font-medium text-dash-text-main">
+                  {user?.name}
+                </p>
+                <p className="text-xs text-dash-text-muted">{user?.email}</p>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center justify-center gap-2 px-4 py-2 mt-1 border border-dash-border rounded-xl text-sm font-medium text-red-400 hover:bg-red-500/10 transition"
+              >
+                <LogOut size={16} />
+                Sair
+              </button>
             </div>
           )}
         </div>

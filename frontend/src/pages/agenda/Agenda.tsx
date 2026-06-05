@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { mockOrders } from '../../mocks/dashboard';
 import MonthCalendar from '../../components/agenda/MonthCalendar';
 import DayDetail from '../../components/agenda/DayDetail';
 import { NewOrderButton } from '../../components/NewOrderButton';
+import { useOrders } from '../../hooks/useOrders';
 
 export default function Agenda() {
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth());
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const { orders, loading } = useOrders();
 
   const handlePrev = () => {
     if (month === 0) {
@@ -28,8 +29,10 @@ export default function Agenda() {
     const today = new Date();
     setYear(today.getFullYear());
     setMonth(today.getMonth());
-    setSelectedDate(today.toISOString().split('T')[0]);
+    setSelectedDate(today.toISOString().split('T')[0]!);
   };
+
+  if (loading) return <p className="text-dash-text-muted">Carregando...</p>;
 
   return (
     <div className="space-y-6">
@@ -44,14 +47,14 @@ export default function Agenda() {
         <MonthCalendar
           year={year}
           month={month}
-          orders={mockOrders}
+          orders={orders}
           selectedDate={selectedDate}
           onSelectDate={setSelectedDate}
           onPrev={handlePrev}
           onNext={handleNext}
           onToday={handleToday}
         />
-        <DayDetail date={selectedDate} orders={mockOrders} />
+        <DayDetail date={selectedDate} orders={orders} />
       </div>
     </div>
   );
